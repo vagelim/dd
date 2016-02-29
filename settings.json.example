@@ -1,0 +1,14 @@
+{
+    "prod": {
+        "API": "",
+        "APP": ""
+    },
+    "personal": {
+        "API": "",
+        "APP": ""
+    },
+    "staging": {
+        "API": "",
+        "APP": ""
+    }
+}
