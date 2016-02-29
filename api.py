@@ -3,6 +3,7 @@ from datadog import initialize, api
 import code
 import json
 import os
+import sys
 
 
 def main(account=None):
