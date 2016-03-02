@@ -5,12 +5,11 @@ import json
 import os
 import sys
 
-
-def main(account=None):
+def main(case=None):
     SETTINGS = os.environ['GET_SCREEN_CREDS']
     keys = json.load(open(SETTINGS, 'r'))
 
-    if account is None:
+    if case is None:
         case = "prod"
     try:
         options = {
@@ -20,7 +19,14 @@ def main(account=None):
     except KeyError:
         case = "prod"
     initialize(**options)
+    
+    TAGS = api.Tag.get_all()['tags']
+    HOSTS = api.Infrastructure.search(q='hosts:')['results']['hosts']
+    print "====================="
     print "DD account: " + case
+    print "Local variables: "
+    print locals().keys()
+    print "=========================================="
     code.interact(local=dict(globals(), **locals()))
 
 
