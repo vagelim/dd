@@ -8,7 +8,6 @@ import os
     
 def main(board_id):
     #Configure keys in settings.json
-
     try:
         SETTINGS = os.environ['GET_SCREEN_CREDS']
     except:
@@ -26,22 +25,21 @@ def main(board_id):
     except KeyError:
         print "Invalid key"
         return -1
-
-    initialize(**options)    
-
+   
     try:
         screen = json.load(open(board_id + '_screen.txt'))
     except IOError:
         from getScreen import get
         screen = json.loads(get(board_id, IO=False))
 
+    initialize(**options) 
+    
     board_title = screen['board_title']
     description = "Copy of " + board_title
     width = screen['width']
     height = screen['height']
     widgets = screen['widgets']
     template_variables = screen['template_variables']
-
 
     result = api.Screenboard.create(board_title=board_title, description=description,
   widgets=widgets, template_variables=template_variables, width=width, height=height)        
@@ -50,7 +48,6 @@ def main(board_id):
         return -1
     print "Cloned board URL: https://app.datadoghq.com/screen/" + str(result['id'])
         
-
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         board_id = raw_input("Which board?: ")
