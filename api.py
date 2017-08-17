@@ -21,7 +21,8 @@ def main(case=None):
                 'app_key': keys[case]['APP']
             }
         except KeyError:
-            case = "prod"
+            print "Keys for {} not found".format(case)
+            return -1
 
     elif os.environ.get('DD_API', None):
         case = "default"
